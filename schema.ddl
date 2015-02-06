@@ -85,13 +85,12 @@ alter table ping_pong.match_queue owner to ping_pong;
 --
 drop table if exists ping_pong.challenges;
 create table ping_pong.challenges (
-  challenge_pool_key bigserial not null,
+  challenge_key bigserial not null,
   match_key bigint null,
   challenge_dtm timestamp with time zone not null default now(),
   accepted_dtm timestamp with time zone null,
   rejected_dtm timestamp with time zone null,
   cancelled_dtm timestamp with time zone null,
-  match_id bigint null,
   constraint pk_challenges primary key (challenge_pool_key)
 );
 alter table ping_pong.challenges owner to ping_pong;
