@@ -91,7 +91,7 @@ create table ping_pong.challenges (
   accepted_dtm timestamp with time zone null,
   rejected_dtm timestamp with time zone null,
   cancelled_dtm timestamp with time zone null,
-  constraint pk_challenges primary key (challenge_pool_key)
+  constraint pk_challenges primary key (challenge_key)
 );
 alter table ping_pong.challenges owner to ping_pong;
 
