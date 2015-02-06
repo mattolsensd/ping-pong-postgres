@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cat > /etc/apt/sources.list.d/pgdg.list <<'EOF'
+deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main
+EOF
+apt-get install wget 
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+apt-get update
+
