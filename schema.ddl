@@ -117,11 +117,11 @@ alter table ping_pong.outcomes owner to ping_pong;
 --
 drop table if exists ping_pong.single_player_pool;
 create table ping_pong.single_player_pool (
-  single_player_pool_key bigserial not null,
+  single_player_key bigserial not null,
   player_key bigint not null,
   skill_level skill_level null,
   match_type match_type null,
   added_dtm timestamp with time zone null default now(),
-  constraint pk_single_player_pool primary key (single_player_pool_key)
+  constraint pk_single_player_pool primary key (single_player_key)
 );
 alter table ping_pong.single_player_pool owner to ping_pong;
