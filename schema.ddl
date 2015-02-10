@@ -74,7 +74,7 @@ create table ping_pong.match_queue (
   queued_dtm timestamp with time zone not null default now(),
   started_dtm timestamp with time zone null,
   completed_dtm timestamp with time zone null,
-  cancelled_dtm timestamp with time zone null,
+  canceled_dtm timestamp with time zone null,
   constraint pk_match_queue primary key (match_queue_key)
 );
 alter table ping_pong.match_queue owner to ping_pong;
@@ -90,7 +90,7 @@ create table ping_pong.challenges (
   challenge_dtm timestamp with time zone not null default now(),
   accepted_dtm timestamp with time zone null,
   rejected_dtm timestamp with time zone null,
-  cancelled_dtm timestamp with time zone null,
+  canceled_dtm timestamp with time zone null,
   constraint pk_challenges primary key (challenge_key)
 );
 alter table ping_pong.challenges owner to ping_pong;
