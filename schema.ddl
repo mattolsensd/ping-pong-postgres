@@ -21,6 +21,7 @@ create type team as enum ('CHALLENGER', 'CHALLENGED');
 drop table if exists ping_pong.matches;
 create table ping_pong.matches (
   match_key bigserial not null,
+  match_type match_type not null,
   constraint pk_matches primary key (match_key)
 );
 alter table ping_pong.matches owner to ping_pong;
