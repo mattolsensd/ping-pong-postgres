@@ -1,9 +1,5 @@
-﻿-- -*- mode: sql -*-
 drop schema if exists ping_pong cascade;
 create schema ping_pong;
-
-drop user if exists ping_pong;
-create user ping_pong password 'ping_pong';
 grant all on schema ping_pong to ping_pong;
 
 drop type if exists skill_level;

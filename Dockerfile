@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install -y python-software-properties software-pro
 USER postgres
 
 # Add the schema
+ADD roles.ddl roles.ddl
 ADD schema.ddl schema.ddl
+ADD functionTruncateAll.ddl functionTruncateAll.ddl
 
 # Create a PostgreSQL role named ``pingpong`` with ``pingpong`` as the password and
 # then create a database `pingpong` owned by the ``pingpong`` role.
@@ -27,8 +29,12 @@ ADD schema.ddl schema.ddl
 #       allows the RUN command to span multiple lines.
 RUN    /etc/init.d/postgresql start &&\
     psql --command "CREATE USER pingpong WITH SUPERUSER PASSWORD 'pingpong';" &&\
+    psql < roles.ddl &&\
     createdb -O pingpong pingpong &&\
-    psql -d pingpong < schema.ddl
+    psql -d pingpong -a -f schema.ddl &&\
+    createdb -O pingpong pingpong_test &&\
+    psql -d pingpong_test -a -f schema.ddl &&\
+    psql -d pingpong_test -a -f functionTruncateAll.ddl
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible. 
