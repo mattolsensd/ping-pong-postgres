@@ -6,8 +6,8 @@ DECLARE
         WHERE tableowner = 'ping_pong' AND schemaname = 'ping_pong';
 BEGIN
     FOR stmt IN statements LOOP
-        --RAISE NOTICE 'TRUNCATE TABLE %', quote_ident(stmt.tablename);
-        EXECUTE 'TRUNCATE TABLE ' || quote_ident(stmt.tablename) || ' CASCADE;';
+        --RAISE NOTICE 'TRUNCATE TABLE ping_pong.%', quote_ident(stmt.tablename);
+        EXECUTE 'TRUNCATE TABLE ping_pong.' || quote_ident(stmt.tablename) || ' CASCADE;';
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
