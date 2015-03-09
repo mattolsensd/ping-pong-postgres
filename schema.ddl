@@ -53,8 +53,8 @@ values ('TheZACH (admin)', '@ZacharyRichards', 'zachr@porch.com', 'PRO STATUS', 
 drop table if exists ping_pong.match_player;
 create table ping_pong.match_player (
   match_player_key bigserial not null,
-  match_key bigint not null,
-  player_key bigint not null,
+  match_key bigint not null references ping_pong.matches(match_key),
+  player_key bigint not null references ping_pong.players(player_key),
   team team not null,
   constraint pk_match_player primary key (match_player_key)
 );
@@ -67,7 +67,7 @@ alter table ping_pong.match_player owner to ping_pong;
 drop table if exists ping_pong.match_queue;
 create table ping_pong.match_queue (
   match_queue_key bigserial not null,
-  match_key bigint null,
+  match_key bigint null references ping_pong.matches(match_key),
   queued_dtm timestamp with time zone not null default now(),
   started_dtm timestamp with time zone null,
   completed_dtm timestamp with time zone null,
@@ -83,7 +83,7 @@ alter table ping_pong.match_queue owner to ping_pong;
 drop table if exists ping_pong.challenges;
 create table ping_pong.challenges (
   challenge_key bigserial not null,
-  match_key bigint null,
+  match_key bigint null references ping_pong.matches(match_key),
   challenge_dtm timestamp with time zone not null default now(),
   accepted_dtm timestamp with time zone null,
   rejected_dtm timestamp with time zone null,
@@ -99,7 +99,7 @@ alter table ping_pong.challenges owner to ping_pong;
 drop table if exists ping_pong.outcomes;
 create table ping_pong.outcomes (
   outcome_key bigserial not null,
-  match_key bigint not null,
+  match_key bigint not null references ping_pong.matches(match_key),
   winning_team team not null,
   winning_score int not null,
   losing_score int not null,
@@ -115,7 +115,7 @@ alter table ping_pong.outcomes owner to ping_pong;
 drop table if exists ping_pong.single_player_pool;
 create table ping_pong.single_player_pool (
   single_player_key bigserial not null,
-  player_key bigint not null,
+  player_key bigint not null references ping_pong.players(player_key),
   skill_level skill_level null,
   match_type match_type null,
   added_dtm timestamp with time zone null default now(),
